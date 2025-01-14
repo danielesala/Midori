@@ -1,0 +1,52 @@
+{
+  "hash": "d6e3b0b5",
+  "configHash": "c83815ec",
+  "lockfileHash": "ccc70542",
+  "browserHash": "3eb95eb0",
+  "optimized": {
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "cecc32ff",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "5d82da35",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "33e5533b",
+      "needsInterop": false
+    },
+    "@primeng/themes/aura": {
+      "src": "../../../../../../node_modules/@primeng/themes/aura/index.mjs",
+      "file": "@primeng_themes_aura.js",
+      "fileHash": "6aff54af",
+      "needsInterop": false
+    },
+    "primeng/config": {
+      "src": "../../../../../../node_modules/primeng/fesm2022/primeng-config.mjs",
+      "file": "primeng_config.js",
+      "fileHash": "9a6d6e34",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-ZFXJ4O5P": {
+      "file": "chunk-ZFXJ4O5P.js"
+    },
+    "chunk-V7JCDB53": {
+      "file": "chunk-V7JCDB53.js"
+    },
+    "chunk-24PACC2S": {
+      "file": "chunk-24PACC2S.js"
+    },
+    "chunk-WDMUDEB6": {
+      "file": "chunk-WDMUDEB6.js"
+    }
+  }
+}
