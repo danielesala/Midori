@@ -1,0 +1,6 @@
+﻿services:
+  backoffice-api:
+    image: backoffice-api
+    build:
+      context: .
+      dockerfile: backoffice-api/Dockerfile
