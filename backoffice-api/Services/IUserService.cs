@@ -15,4 +15,8 @@ public interface IUserService
     void Delete(int id);
     
     UserOutDto GetUserByEmail(string email);
+    
+    UserOutDto GetUserByUsername(string username);
+    
+    List<UserOutDto> GetUsersByGroup(string groupName);
 }

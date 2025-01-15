@@ -100,4 +100,41 @@ public class UserController(IUserService userService, ILogger<UserController> lo
 
         return Task.FromResult<IActionResult>(Ok(user));
     }
+
+    [HttpGet("username/{username}")]
+    public Task<IActionResult> GetByUsername(string username)
+    {
+        UserOutDto user;
+
+        try
+        {
+            user = _userService.GetUserByUsername(username);
+        }
+        catch (UserNotFoundException exception)
+        {
+            _logger.LogError(exception.Message);
+            return Task.FromResult<IActionResult>(NotFound(exception.Message));
+        }
+        
+        return Task.FromResult<IActionResult>(Ok(user));
+    }
+
+    [HttpGet("group/{groupName}")]
+    public Task<IActionResult> GetByGroupName(string groupName)
+    {
+        
+        List<UserOutDto> users;
+
+        try
+        {
+            users = _userService.GetUsersByGroup(groupName);
+        }
+        catch (UserNotFoundException exception)
+        {
+            _logger.LogError(exception.Message);
+            return Task.FromResult<IActionResult>(NotFound(exception.Message));
+        }
+
+        return Task.FromResult<IActionResult>(Ok(users));
+    }
 }

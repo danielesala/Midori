@@ -96,9 +96,30 @@ public class UserService(AppDbContext appDbContext, ILogger<UserService> logger)
 
     public UserOutDto GetUserByEmail(string email)
     {
+        
         User user = _context.Users.FirstOrDefault(u => u.Email == email) ?? throw new UserNotFoundException("user not found");
         _logger.LogDebug($"user found: {user}");
         
         return UserOutDto.Build(user);
+    }
+
+    public UserOutDto GetUserByUsername(string username)
+    {
+        
+        User user = _context.Users.FirstOrDefault(u => u.Username == username) ?? throw new UserNotFoundException("user not found");
+        _logger.LogDebug($"user found: {user}");
+        
+        return UserOutDto.Build(user);
+    }
+
+    public List<UserOutDto> GetUsersByGroup(string groupName)
+    {
+        
+        List<User> users = _context.Users.Where(u => u.Group == groupName).ToList();
+        _logger.LogDebug($"users found: {users}");
+        
+        //building output
+        List<UserOutDto> usersOutDto = users.Select(user => UserOutDto.Build(user)).ToList();
+        return usersOutDto;
     }
 }
