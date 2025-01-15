@@ -48,7 +48,7 @@ public class UserService(AppDbContext appDbContext, ILogger<UserService> logger)
         newUser.Password = user.Password;
         newUser.FirstName = user.FirstName;
         newUser.LastName = user.LastName;
-        newUser.Group = user.Group;
+        newUser.Group = user.Group.ToUpper();
         newUser.Role = Role.User;
         newUser.Status = (Status)Enum.Parse(typeof(Status), user.Status);
         
@@ -72,7 +72,7 @@ public class UserService(AppDbContext appDbContext, ILogger<UserService> logger)
         userToUpdate.Password = user.Password;
         userToUpdate.FirstName = user.FirstName;
         userToUpdate.LastName = user.LastName;
-        userToUpdate.Group = user.Group;
+        userToUpdate.Group = user.Group.ToUpper();
         userToUpdate.Role = Role.User;
         userToUpdate.Status = (Status)Enum.Parse(typeof(Status), user.Status);
         

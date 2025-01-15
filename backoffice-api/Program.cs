@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// postgreSQL DB settings
+// postgres DB settings
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<AppDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("SampleDbConnection")));
@@ -25,7 +25,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.Migrate(); // Applica automaticamente le migrazioni
+    dbContext.Database.Migrate(); // add auto migration for DB
 }
 
 // Configure the HTTP request pipeline.

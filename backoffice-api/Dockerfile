@@ -4,7 +4,6 @@ WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
 
-# Usa l'immagine SDK .NET per la build e la gestione delle migrazioni
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
