@@ -73,7 +73,7 @@ public class UserService(AppDbContext appDbContext, ILogger<UserService> logger)
         userToUpdate.FirstName = user.FirstName;
         userToUpdate.LastName = user.LastName;
         userToUpdate.Group = user.Group.ToUpper();
-        userToUpdate.Role = Role.User;
+        userToUpdate.Role = (Role)Enum.Parse(typeof(Role), user.Role);
         userToUpdate.Status = (Status)Enum.Parse(typeof(Status), user.Status);
         
         _context.SaveChanges();

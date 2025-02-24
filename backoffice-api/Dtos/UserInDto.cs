@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using backoffice_api.Models;
 
 namespace backoffice_api.Dtos;
 
@@ -22,6 +23,8 @@ public class UserInDto
     [MaxLength(50, ErrorMessage = "LastName cannot be more than 50 characters")]
     [Required (ErrorMessage = "LastName is required")]
     public string LastName { get; set; } = string.Empty;
+    
+    public string Role { get; set; } = string.Empty;
     
     [Required (ErrorMessage = "Group is required")]
     public string Group  { get; set; } = string.Empty;
