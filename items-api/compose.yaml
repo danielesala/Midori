@@ -1,0 +1,6 @@
+﻿services:
+  items-api:
+    image: items-api
+    build:
+      context: .
+      dockerfile: items-api/Dockerfile
