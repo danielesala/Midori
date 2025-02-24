@@ -1,14 +1,14 @@
 ﻿services:
   backoffice-api:
     image: backoffice-api
-    container_name: backoffice-api
+    container_name: midori-backoffice
     build:
       context: .
       dockerfile: backoffice-api/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:5000
     ports:
-      - "5000:5000"
+      - "5000:5000"  # porta interna dell'API
     networks:
       - midori-network
 
@@ -26,10 +26,21 @@
     networks:
       - midori-network
 
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "8080:80"  # porta pubblica 8080
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # carica il file di configurazione NGINX
+    networks:
+      - midori-network
+    depends_on:
+      - backoffice-api
+
 networks:
   midori-network:
     driver: bridge
-
 
 volumes:
   postgres_data:

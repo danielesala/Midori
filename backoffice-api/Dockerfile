@@ -21,3 +21,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "backoffice-api.dll"]
+
+ENV ASPNETCORE_ENVIRONMENT=Development
