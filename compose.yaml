@@ -12,9 +12,9 @@
     networks:
       - midori-network
 
-  postgres-db:
+  midori-backoffice-db:
     image: postgres:latest
-    container_name: postgres.db
+    container_name: midori-backoffice-db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: postgresql
