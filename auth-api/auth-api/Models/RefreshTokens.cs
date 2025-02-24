@@ -11,13 +11,17 @@ namespace auth_api.Models
     {
         [Key]
         public int Id { get; set; }
+        
         [Required]
         [MaxLength(500)]
         public string Token { get; set; } = null!;
+        
         [Required]
         public DateTime CreationTime { get; set; }
+        
         [Required]
         public DateTime ExpireTime { get; set; }
+        
         [Required]
         public int UserId { get; set; }
 

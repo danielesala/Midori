@@ -7,14 +7,29 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace auth_api.Services
 {
-    public class AuthService(IOptions<JwtKeySettings> jwtKeySettings) : IAuthService
+    public class AuthService : IAuthService
     {
         
-        private readonly JwtKeySettings _jwtKeySettings = jwtKeySettings.Value;
+        
+        private readonly JwtKeySettings _jwtKeySettings;
+        private readonly ILogger<AuthService> _logger;
+
+        public AuthService(IOptions<JwtKeySettings> jwtKeySettings, ILogger<AuthService> logger)
+        {
+            _jwtKeySettings = jwtKeySettings.Value;
+            _logger = logger;
+        }
 
         public string GenerateJwtToken(string email, string password)
         {
 
+            //check user credentials
+            
+            
+            
+            
+            // building token
+            
             var tokenHandler = new JwtSecurityTokenHandler();
             
             var privateKey = _jwtKeySettings.PrivateKey;
@@ -43,6 +58,7 @@ namespace auth_api.Services
             };
             
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            _logger.LogDebug($"Generated JWT Token: {token}");
 
             return tokenHandler.WriteToken(token);
         }

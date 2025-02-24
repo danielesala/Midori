@@ -1,27 +1,34 @@
+using auth_api.Clients;
 using auth_api.Datas;
+using auth_api.Models;
 using auth_api.Services;
 using Microsoft.EntityFrameworkCore;
-using System;
-using auth_api.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
-
+// postgres DB settings
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<ApplicationDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("SampleDbConnection")));
+
 
 builder.Services.Configure<JwtKeySettings>(
     builder.Configuration.GetSection("JwtKey")
 );
 
-builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddHttpClient<BackOfficeClient>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5000/");
+});
+
+
+// Adding Services to Scope
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -33,7 +40,6 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate(); // add auto migration for DB
 }
 
-// Configure the HTTP request pipeline.
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

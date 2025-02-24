@@ -6,9 +6,10 @@
       context: .
       dockerfile: auth-api/Dockerfile
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000
     ports:
-      - "5000:5000"  # porta interna dell'API
+      - "5001:5000"  # porta interna dell'API
     networks:
       - midori-network
 
@@ -20,7 +21,7 @@
       POSTGRES_PASSWORD: postgresql
       POSTGRES_DB: midori-auth
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -30,7 +31,7 @@
     image: nginx:latest
     container_name: nginx-proxy-auth-api
     ports:
-      - "8080:80"  # porta pubblica 8080
+      - "8081:80"  # porta pubblica 8081
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf  # carica il file di configurazione NGINX
     networks:
