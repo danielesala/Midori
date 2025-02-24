@@ -1,0 +1,44 @@
+services:
+  backoffice-api:
+    image: santambrogiochristian/midori-backoffice
+    container_name: midori-backoffice
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "5000:5000"
+    networks:
+      - midori-network
+
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres.db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: postgresql
+      POSTGRES_DB: midori-backoffice
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - midori-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "8080:80"  # porta pubblica 8080
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # carica il file di configurazione NGINX
+    networks:
+      - midori-network
+    depends_on:
+      - backoffice-api
+
+networks:
+  midori-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
