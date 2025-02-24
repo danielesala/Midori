@@ -3,12 +3,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace auth_api.Datas
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext(IConfiguration configuration) : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql(configuration.GetConnectionString("SampleDbConnection"));
+            }
         }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
+        
         DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

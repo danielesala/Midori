@@ -1,10 +1,10 @@
 ﻿services:
-  backoffice-api:
-    image: backoffice-api
-    container_name: midori-backoffice
+  auth-api:
+    image: auth-api
+    container_name: midori-auth
     build:
       context: .
-      dockerfile: backoffice-api/Dockerfile
+      dockerfile: auth-api/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:5000
     ports:
@@ -12,13 +12,13 @@
     networks:
       - midori-network
 
-  postgres-db:
+  midori-auth-db:
     image: postgres:latest
-    container_name: postgres.db
+    container_name: midori-auth-db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: postgresql
-      POSTGRES_DB: midori-backoffice
+      POSTGRES_DB: midori-auth
     ports:
       - "5433:5432"
     volumes:
@@ -28,7 +28,7 @@
 
   nginx:
     image: nginx:latest
-    container_name: nginx-proxy
+    container_name: nginx-proxy-auth-api
     ports:
       - "8080:80"  # porta pubblica 8080
     volumes:
@@ -36,7 +36,7 @@
     networks:
       - midori-network
     depends_on:
-      - backoffice-api
+      - auth-api
 
 networks:
   midori-network:

@@ -2,5 +2,6 @@
 {
     public interface IAuthService
     {
+        string GenerateJwtToken(string email, string password);
     }
 }
