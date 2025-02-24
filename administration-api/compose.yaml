@@ -1,0 +1,6 @@
+﻿services:
+  administration-api:
+    image: administration-api
+    build:
+      context: .
+      dockerfile: administration-api/Dockerfile
