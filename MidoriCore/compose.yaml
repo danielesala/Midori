@@ -1,6 +1,0 @@
-﻿services:
-  midoricore:
-    image: midoricore
-    build:
-      context: .
-      dockerfile: MidoriCore/Dockerfile
